@@ -1412,8 +1412,8 @@ for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.markdown(f"<div class='card'>{message['content']}</div>", unsafe_allow_html=True)
         if "results" in message:
-            if not message["results"].empty: 
-                st.dataframe(message["results"])
+            # if not message["results"].empty: 
+            st.dataframe(message["results"])
         # if "summary" in message:
         #     st.write(message["summary"])
 
