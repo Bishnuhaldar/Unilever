@@ -1354,8 +1354,7 @@ if user_input:
     st.session_state.messages.append({"role": "user", "content": user_input})
     mock_question=False
     for i in questions:
-        
-        if i in user_input.strip().lower() :
+        if i==user_input.strip().lower() :
             mock_question=True
             prompt=f"""a user is asking questions. user questions={user_input}
             
