@@ -192,19 +192,19 @@ country_query = f"""
 # Slider to set limit of result
 
 #Sidebar for chart type selection
-st.sidebar.subheader("Chart Type")
-chart_types = {
-    "Bar Chart": st.sidebar.checkbox("Bar Chart"),
-    "Pie Chart": st.sidebar.checkbox("Pie Chart"),
-    "Line Chart": st.sidebar.checkbox("Line Chart"),
-    "Histogram": st.sidebar.checkbox("Histogram"),
-    "Radar Chart": st.sidebar.checkbox("Radar Chart")
-}
+# st.sidebar.subheader("Chart Type")
+# chart_types = {
+#     "Bar Chart": st.sidebar.checkbox("Bar Chart"),
+#     "Pie Chart": st.sidebar.checkbox("Pie Chart"),
+#     "Line Chart": st.sidebar.checkbox("Line Chart"),
+#     "Histogram": st.sidebar.checkbox("Histogram"),
+#     "Radar Chart": st.sidebar.checkbox("Radar Chart")
+# }
 
-# st.sidebar.radio('',['Finance','Supply chain',
-# 'Revenue growth','IT ops', 'SDLC'])
+# # st.sidebar.radio('',['Finance','Supply chain',
+# # 'Revenue growth','IT ops', 'SDLC'])
 
-limit = st.sidebar.slider('Limit Of Output', 0, 100, 10)
+# limit = st.sidebar.slider('Limit Of Output', 0, 100, 10)
 
 questions=['what are the potential options to reduce churn by 2%','what are the options to bring down marketing costs','key options to increase customer satisfaction','how to increase customer acquisition by 20%','how to reduce acquisition cost','how to increase retention','increase market share & profitability','what was the total sales revenue for the last quarter','can you segment our customers based on their purchase frequency','what are our most frequent purchasers buying that our least frequent purchasers aren’t',
            'are there any other distinguishing factors between the purchase frequency segments','what is the overall sentiment of our customer reviews','can you summarize the key points of feedback from our customer reviews','is there any missing data or other questions that we should be asking for customer feedback on that could improve analysis',
@@ -1420,47 +1420,47 @@ for message in st.session_state.messages:
 
 
 
-# Visualization section
-if "messages" in st.session_state:
-    # Find the last message that contains results
-    last_data = None
-    for message in reversed(st.session_state.messages):
-        if "results" in message:
-            last_data = message["results"]
-            break
+# # Visualization section
+# if "messages" in st.session_state:
+#     # Find the last message that contains results
+#     last_data = None
+#     for message in reversed(st.session_state.messages):
+#         if "results" in message:
+#             last_data = message["results"]
+#             break
     
-    if last_data is not None and not last_data.empty:
-        st.write("## Data Visualization")
+#     if last_data is not None and not last_data.empty:
+#         st.write("## Data Visualization")
 
-        numeric_columns = last_data.select_dtypes(include=['float64', 'int64']).columns
-        non_numeric_columns = last_data.select_dtypes(exclude=['float64', 'int64']).columns
+#         numeric_columns = last_data.select_dtypes(include=['float64', 'int64']).columns
+#         non_numeric_columns = last_data.select_dtypes(exclude=['float64', 'int64']).columns
 
-        for chart_type, selected in chart_types.items():
-            if selected:
-                st.write("## Data Visualization")
-                st.write(f"### {chart_type}")
-                if chart_type == "Bar Chart" and len(numeric_columns) >= 1 and len(non_numeric_columns) >= 1:
-                    fig = px.bar(last_data, x=non_numeric_columns[0], y=numeric_columns[0], color=non_numeric_columns[0])
-                    st.plotly_chart(fig)
-                elif chart_type == "Pie Chart" and len(numeric_columns) >= 1 and len(non_numeric_columns) >= 1:
-                    fig = px.pie(last_data, values=numeric_columns[0], names=non_numeric_columns[0])
-                    st.plotly_chart(fig)
-                elif chart_type == "Line Chart" and len(numeric_columns) >= 1 and len(non_numeric_columns) >= 1:
-                    fig = px.line(last_data, x=non_numeric_columns[0], y=numeric_columns[0])
-                    st.plotly_chart(fig)
-                elif chart_type == "Histogram" and len(numeric_columns) >= 1:
-                    fig = px.histogram(last_data, x=numeric_columns[0])
-                    st.plotly_chart(fig)
-                elif chart_type == "Radar Chart" and len(numeric_columns) > 1:
-                    fig = go.Figure()
-                    fig.add_trace(go.Scatterpolar(
-                        r=last_data[numeric_columns].mean().values,
-                        theta=numeric_columns,
-                        fill='toself'
-                    ))
-                    fig.update_layout(polar=dict(radialaxis=dict(visible=True)))
-                    st.plotly_chart(fig)
-                else:
-                    st.warning(f"Not enough appropriate columns to plot a {chart_type}.")
-    else:
-        st.write("")
+#         for chart_type, selected in chart_types.items():
+#             if selected:
+#                 st.write("## Data Visualization")
+#                 st.write(f"### {chart_type}")
+#                 if chart_type == "Bar Chart" and len(numeric_columns) >= 1 and len(non_numeric_columns) >= 1:
+#                     fig = px.bar(last_data, x=non_numeric_columns[0], y=numeric_columns[0], color=non_numeric_columns[0])
+#                     st.plotly_chart(fig)
+#                 elif chart_type == "Pie Chart" and len(numeric_columns) >= 1 and len(non_numeric_columns) >= 1:
+#                     fig = px.pie(last_data, values=numeric_columns[0], names=non_numeric_columns[0])
+#                     st.plotly_chart(fig)
+#                 elif chart_type == "Line Chart" and len(numeric_columns) >= 1 and len(non_numeric_columns) >= 1:
+#                     fig = px.line(last_data, x=non_numeric_columns[0], y=numeric_columns[0])
+#                     st.plotly_chart(fig)
+#                 elif chart_type == "Histogram" and len(numeric_columns) >= 1:
+#                     fig = px.histogram(last_data, x=numeric_columns[0])
+#                     st.plotly_chart(fig)
+#                 elif chart_type == "Radar Chart" and len(numeric_columns) > 1:
+#                     fig = go.Figure()
+#                     fig.add_trace(go.Scatterpolar(
+#                         r=last_data[numeric_columns].mean().values,
+#                         theta=numeric_columns,
+#                         fill='toself'
+#                     ))
+#                     fig.update_layout(polar=dict(radialaxis=dict(visible=True)))
+#                     st.plotly_chart(fig)
+#                 else:
+#                     st.warning(f"Not enough appropriate columns to plot a {chart_type}.")
+#     else:
+#         st.write("")
