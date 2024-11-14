@@ -1377,7 +1377,6 @@ if user_input:
         {st.session_state.schema[0]}
         Write a SQL query for user input
         user input-{user_input}.
-        set limit to {limit}.
         Write only the executable query without any comments or additional text.
         """
         
