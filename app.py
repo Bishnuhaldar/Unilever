@@ -9,7 +9,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 
 # Configure the OpenAI API
-key = "AIzaSyB2Ap-o973pkpyvPaKiktbZwd4LX1FxU2c"
+key = "AIzaSyBFsjxrl6A6G6dvuGjEaXKluW8DB91WoDs"
 genai.configure(api_key=key)
 generation_config = {
     "temperature": 1,
